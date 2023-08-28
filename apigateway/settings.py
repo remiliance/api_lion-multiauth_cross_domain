@@ -48,7 +48,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'drf_yasg2',
-    'api'
+    'api',
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -81,7 +82,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'apigateway.wsgi.application'
-
 
 #---------------POSTGRES ------------------------------
 DATABASES = {
@@ -125,11 +125,11 @@ AUTH_PASSWORD_VALIDATORS = [
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES":[
-        #"rest_framework.authentication.TokenAuthentication",
-        #"rest_framework.authentication.SessionAuthentication",
+        "rest_framework.authentication.TokenAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
     ],
     "DEFAULT_PERMISSION_CLASSES" :[
-      #  "rest_framework.permissions.IsAuthenticated",
+       "rest_framework.permissions.IsAuthenticated",
        # "rest_framework_api_key.permissions.HasAPIKey",
 
     ]
@@ -161,10 +161,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 SITE_NAME=env("SITE_NAME")
 
-
-CSRF_COOKIE_NAME = "toto"
-CSRF_COOKIE_DOMAIN = ".zoo"
-
 CSRF_COOKIE_SAMESITE = 'Lax'
 SESSION_COOKIE_SAMESITE = 'Lax'
 CSRF_COOKIE_HTTPONLY = True
@@ -176,15 +172,29 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
     'http://127.0.0.1:3000',
     'http://zoo.com:3000',
+    'http://localhost:4000',
+    'http://127.0.0.1:4000',
+    'http://zoo.com:4000',
+    'http://zoo.com:5000',
+    'http://localhost:5000',
 ]
+
 #* + le allow host en haut
-CSRF_COOKIE_NAME = 'mon_cookie'
-CSRF_COOKIE_DOMAIN = '.zoo.com'
+#CSRF_COOKIE_NAME = 'mon_cookie'
+#CSRF_COOKIE_DOMAIN = '.zoo.com'
 #
 CORS_EXPOSE_HEADERS = ['Content-Type', 'X-CSRFToken']
 CORS_ALLOW_CREDENTIALS = True
 
-CSRF_TRUSTED_ORIGINS = ['http://localhost:3000', 'http://127.0.0.1:3000','http://zoo.com:3000', ]
+
+CSRF_TRUSTED_ORIGINS = ['http://localhost:3000',
+                        'http://127.0.0.1:3000',
+                        'http://zoo.com:3000',
+                        'http://localhost:4000',
+                        'http://127.0.0.1:4000',
+                        'http://zoo.com:4000',
+                        'http://zoo.com:5000',
+                        ]
 
 SESSION_COOKIE_DOMAIN = ".zoo.com"
 SESSION_COOKIE_NAME = "sessionid"

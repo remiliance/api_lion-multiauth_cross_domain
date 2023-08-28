@@ -26,5 +26,5 @@ class Lion(viewsets.ViewSet):
     @swagger_auto_schema()
     @action(detail=False, methods=["POST"])
     def test_lion_post(self, request):
-        data = {"status": "ca marche Post POST!"}
+        data = {"status": "ca marche Lion POST!"}
         return JsonResponse(data, safe=False, status=200)
